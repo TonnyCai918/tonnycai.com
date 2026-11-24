@@ -5,7 +5,7 @@ Personal academic site for Yicheng (Tonny) Cai. Plain static files, no build ste
 | Path | What it is |
 |---|---|
 | `index.html` | The whole site: markup, CSS and JS in one file |
-| `cv.pdf` | Three-page academic CV, linked from section 03 and section 07 |
+|  `Yicheng(Tonny) Cai-CV.pdf` | Three-page academic CV, linked from section 03 and section 07 |
 | `img/t/`, `img/p/` | Photographs: `t` = grid thumbnails (560 px), `p` = viewer images (1600 px). `fNN` = film scan, `dNN` = digital |
 | `img/c/` | Bottle collection: `cNN_t.jpg` thumbnail, `cNN.jpg` full |
 | `CNAME` | Tells GitHub Pages to serve this repo at tonnycai.com |
