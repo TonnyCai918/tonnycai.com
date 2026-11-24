@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yicheng (Tonny) Cai</title>
 <meta name="description" content="Yicheng (Tonny) Cai — economics, Duke University. Chinese administrative registries, thresholds and local government. Photographs, a Coca-Cola bottle collection, and a travel list.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* Layout idea: a ruled ledger page — fixed left rail of numbered entries, one sheet at a time sliding into the right column. */
 :root{
@@ -18,9 +15,9 @@
   --accent:#27417A;
   --rule:#D3D8D2;
   --shadow:0 1px 0 rgba(20,24,26,.04), 0 12px 32px -24px rgba(20,24,26,.45);
-  --display:"Fraunces",Georgia,"Times New Roman",serif;
-  --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --display:"Times New Roman",Times,serif;
+  --body:Arial,Helvetica,sans-serif;
+  --mono:Arial,Helvetica,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){
@@ -50,22 +47,19 @@ a{color:var(--accent); text-underline-offset:3px; text-decoration-thickness:.07e
 a:hover{text-decoration-thickness:.12em}
 :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
 
-.shell{display:grid; grid-template-columns:286px minmax(0,1fr); min-height:100%; max-width:100%}
+.shell{display:grid; grid-template-columns:300px minmax(0,1fr); min-height:100%; max-width:100%}
 
 /* ---------- left rail ---------- */
 .rail{
   position:sticky; top:0; align-self:start; height:100vh;
   display:flex; flex-direction:column; gap:22px;
-  padding:42px 26px 28px 40px;
+  padding:42px 24px 28px 34px;
   border-right:1px solid var(--rule);
 }
-.mark{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
 .name{
-  font-family:var(--display); font-weight:600; font-size:30px; line-height:1.08;
-  margin:10px 0 8px; text-wrap:balance; letter-spacing:-.015em;
+  font-family:var(--display); font-weight:600; font-size:28px; line-height:1.14;
+  margin:4px 0 8px; text-wrap:balance; letter-spacing:-.005em;
 }
-.name .alt{display:block; font-size:17px; font-weight:400; color:var(--muted); letter-spacing:0; margin-top:4px}
-.role{font-size:14px; color:var(--muted); margin:0}
 
 nav{display:flex; flex-direction:column; gap:1px; margin-top:2px}
 .navbtn{
@@ -115,25 +109,12 @@ nav{display:flex; flex-direction:column; gap:1px; margin-top:2px}
   color:var(--muted); margin:0 0 18px;
 }
 .eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
-h1{font-family:var(--display); font-weight:600; font-size:clamp(30px,4.4vw,44px); line-height:1.1; letter-spacing:-.02em; margin:0 0 18px; text-wrap:balance}
-h2{font-family:var(--display); font-weight:600; font-size:21px; line-height:1.25; margin:34px 0 10px; text-wrap:balance}
+h1{font-family:var(--display); font-weight:600; font-size:clamp(31px,4.5vw,45px); line-height:1.12; letter-spacing:-.01em; margin:0 0 18px; text-wrap:balance}
+h2{font-family:var(--display); font-weight:600; font-size:22px; line-height:1.25; margin:34px 0 10px; text-wrap:balance}
 h3{font-family:var(--body); font-weight:600; font-size:15.5px; margin:0 0 4px}
 p{margin:0 0 14px; max-width:66ch}
 .lede{font-size:18.5px; line-height:1.6}
-.serif{font-family:var(--display); font-size:17.5px; line-height:1.68; max-width:62ch}
-
-/* figures strip */
-.figures{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
-  background:var(--rule); border:1px solid var(--rule); border-radius:4px; overflow:hidden;
-  margin:28px 0 8px;
-}
-.fig{background:var(--card); padding:16px 16px 14px}
-.fig b{
-  display:block; font-family:var(--mono); font-weight:500; font-size:19px;
-  font-variant-numeric:tabular-nums; letter-spacing:-.02em; color:var(--ink);
-}
-.fig span{display:block; font-size:12.5px; color:var(--muted); margin-top:5px; line-height:1.4}
+.serif{font-family:var(--display); font-size:19px; line-height:1.64; max-width:60ch}
 
 /* entries */
 .entry{padding:18px 0; border-top:1px solid var(--rule)}
@@ -288,18 +269,16 @@ p{margin:0 0 14px; max-width:66ch}
 
   <aside class="rail">
     <div>
-      <p class="mark">Economics &middot; Duke University</p>
-      <h2 class="name" style="margin-top:10px">Yicheng Cai<span class="alt">also Tonny Cai</span></h2>
-      <p class="role">Master of Arts in Economics. Chinese administrative registries, public finance, firm entry and exit.</p>
+      <h2 class="name">Yicheng(Tonny) Cai</h2>
     </div>
 
     <nav id="nav" aria-label="Sections">
-      <button class="navbtn" data-go="about" aria-current="true"><span class="idx">01</span><span>About</span></button>
+      <button class="navbtn" data-go="about" aria-current="true"><span class="idx">01</span><span>About Me</span></button>
       <button class="navbtn" data-go="research"><span class="idx">02</span><span>Research</span></button>
       <button class="navbtn" data-go="cv"><span class="idx">03</span><span>CV</span></button>
-      <button class="navbtn" data-go="photographs"><span class="idx">04</span><span>Photographs</span></button>
-      <button class="navbtn" data-go="bottles"><span class="idx">05</span><span>Bottles</span></button>
-      <button class="navbtn" data-go="travel"><span class="idx">06</span><span>Travel</span></button>
+      <button class="navbtn" data-go="photographs"><span class="idx">04</span><span>My Photographs</span></button>
+      <button class="navbtn" data-go="bottles"><span class="idx">05</span><span>My Collections</span></button>
+      <button class="navbtn" data-go="travel"><span class="idx">06</span><span>World Travel</span></button>
       <button class="navbtn" data-go="contact"><span class="idx">07</span><span>Contact</span></button>
     </nav>
 
@@ -313,24 +292,14 @@ p{margin:0 0 14px; max-width:66ch}
 
     <!-- 01 -->
     <section class="panel is-active" id="about" aria-labelledby="about-h">
-      <p class="eyebrow">01 &nbsp;About</p>
+      <p class="eyebrow">01 &nbsp;About Me</p>
       <h1 id="about-h">A river town, and the habit of looking things up</h1>
-      <p class="serif">I was born in Yichang, a mountain city in central China. The ranges stand at its back and the Yangtze cuts it in two, and the people it makes are shaped by both: hardy enough to climb, and mild in the way a long river is mild. I grew up crossing between the city and the countryside. When someone asks where I am from, what surfaces first is the bright commotion of that river town, and a half-second later the green, unripe smell of hill water, as if my shoes were walking a paved street while still caked with country mud.</p>
-      <p class="serif">Coming to the United States, I met the most genuine and generous people I have known, the faculty at Oberlin. They are the reason I fell in love with research, and it was their patience and their encouragement that turned the road toward economics. I intend to carry what they taught me, and the qualities they taught it with, into whatever the work becomes.</p>
-      <p>Today that work sits between public finance and development, and it is mostly about rules written as numbers. A cap of fifty partners. A profit threshold of ten million. A list you are required to leave by a certain year. I study what happens on the other side of rules like these, using Chinese administrative registries large enough that the arithmetic itself becomes the evidence.</p>
-
-      <div class="figures">
-        <div class="fig"><b>81,482,453</b><span>registration records screened for manufactured entry</span></div>
-        <div class="fig"><b>3,511,920</b><span>parcel-level land transfers classified by buyer</span></div>
-        <div class="fig"><b>2,405</b><span>development zones matched to their declared industries</span></div>
-        <div class="fig"><b>59,061</b><span>partnerships from a single registration operation</span></div>
-      </div>
-
+      <p class="serif">I was born in Yichang, a mountain city in central China. The ranges stand at its back and the Yangtze cuts it in two, and the people it makes are shaped by both: the mountains give them the footing for a steep road, and the river the patience not to hurry on it. I grew up crossing between the city and the countryside. When someone asks where I am from, what surfaces first is the bright commotion of that river town, and a half-second later the green, unripe smell of hill water, as if my shoes were walking a paved street while still caked with country mud.</p>
       <h2>Off the clock</h2>
       <div class="cards">
         <div class="card">
           <h3>Cooking</h3>
-          <p>The one hobby with a hard deadline and an immediate referee. Hunan and Hubei food mostly, which is to say a great deal of chili and a tolerance for smoke.</p>
+          <p>One of my hobbies is cooking, mostly in Sichuan style, like diving beef, pepper chicken, etc. I also like trying interesting food around the world, like canned herring, Icelandic fermented auk, blue cheese, and so on. If you know some interesting food with a great story, please let me know.</p>
         </div>
         <div class="card">
           <h3>Photography</h3>
@@ -340,19 +309,13 @@ p{margin:0 0 14px; max-width:66ch}
           <h3>Coca-Cola bottles</h3>
           <p>A collection built since school, mostly limited editions and foreign-market packaging. <a href="#bottles">Section 05</a>.</p>
         </div>
-        <div class="card">
-          <h3>Founding a club</h3>
-          <p>I started the OEES Club at Oberlin in 2023 and ran it until I graduated, a standing seminar where development economics, environmental economics and sociology argue with each other.</p>
-        </div>
       </div>
-      <p class="note">Every figure on this site comes from a draft that regenerates its own numbers from the data and checks them against the written text before it will compile.</p>
     </section>
 
     <!-- 02 -->
     <section class="panel" id="research" aria-labelledby="research-h">
       <p class="eyebrow">02 &nbsp;Research</p>
       <h1 id="research-h">Working papers</h1>
-      <p>The method is usually the same. Take a register nobody built for research, establish what it can and cannot support, and look for the structure a rule leaves behind. Sometimes the answer is an event study. Sometimes it is a count that never exceeds a particular number.</p>
 
       <div class="entry">
         <p class="meta">October 2026 &middot; draft available</p>
@@ -432,38 +395,37 @@ p{margin:0 0 14px; max-width:66ch}
       <h2>Industry</h2>
       <div class="cvrow">
         <div class="when">2023 to now</div>
-        <div><h3>Equity and industry research</h3><p>Healthcare and chemicals coverage at Huafu Securities and Guotai Junan Securities; private equity screening at Paratus Capital; solar cell coverage at East Asia Qianhai Securities.</p></div>
+        <div><h3>Equity and industry research</h3><p>Healthcare and chemicals coverage at Huafu Securities and Guotai Junan Securities; solar cell coverage at East Asia Qianhai Securities.</p></div>
       </div>
 
-      <a class="pdf" href="cv.pdf">Full CV, PDF, three pages</a>
+      <a class="pdf" href="cv.pdf" download="Yicheng(Tonny) Cai-CV.pdf">Yicheng(Tonny) Cai-CV &mdash; PDF, three pages</a>
     </section>
 
     <!-- 04 -->
     <section class="panel" id="photographs" aria-labelledby="ph-h">
-      <p class="eyebrow">04 &nbsp;Photographs</p>
-      <h1 id="ph-h">Photographs</h1>
+      <p class="eyebrow">04 &nbsp;My Photographs</p>
+      <h1 id="ph-h">My Photographs</h1>
       <p class="lede">Film and digital, made between 2021 and 2026. The ice and the ships are the Arctic; the yellow walls and the prayer flags are Tibet; a good deal of the rest is the English coast, Iceland, and whatever was outside the window.</p>
       <div class="gallerybar" role="group" aria-label="Filter photographs">
-        <button class="chipbtn" data-filter="all" aria-pressed="true">All 62</button>
-        <button class="chipbtn" data-filter="film" aria-pressed="false">Film 23</button>
-        <button class="chipbtn" data-filter="digital" aria-pressed="false">Digital 39</button>
+        <button class="chipbtn" data-filter="all" aria-pressed="true">All 86</button>
+        <button class="chipbtn" data-filter="film" aria-pressed="false">Film 56</button>
+        <button class="chipbtn" data-filter="digital" aria-pressed="false">Digital 30</button>
       </div>
       <div class="gallery" id="gal-photos"></div>
-      <p class="note">Click any frame to open it. Arrow keys move through the set, Escape closes it.</p>
     </section>
 
     <!-- 05 -->
     <section class="panel" id="bottles" aria-labelledby="bo-h">
-      <p class="eyebrow">05 &nbsp;Collection</p>
+      <p class="eyebrow">05 &nbsp;My Collections</p>
       <h1 id="bo-h">Coca-Cola bottles</h1>
-      <p class="lede">A collection built since school: limited editions, anniversary runs, foreign-market packaging, and the occasional shape that only existed in one country for one summer. It is the same instinct as the research, honestly. A long run of near-identical objects, and all the interest sitting in the small deviations.</p>
+      <p class="lede">A collection built since school: limited editions, anniversary runs, foreign-market packaging, and the occasional shape that only existed in one country for one summer.</p>
       <div class="gallery bottles" id="gal-cola"></div>
       <p class="note">Shelf photographs, not a catalogue. If you collect too, I would like to hear about it.</p>
     </section>
 
     <!-- 06 -->
     <section class="panel" id="travel" aria-labelledby="tr-h">
-      <p class="eyebrow">06 &nbsp;Travel</p>
+      <p class="eyebrow">06 &nbsp;World Travel</p>
       <h1 id="tr-h">Where I have been, and where I am going</h1>
       <p class="lede">Ten countries and more than half the provinces and regions of China. The list below is honest about which of these I would go back to tomorrow.</p>
 
@@ -487,7 +449,6 @@ p{margin:0 0 14px; max-width:66ch}
         <li class="place loved">Kaohsiung</li><li class="place loved">Tibet</li><li class="place loved">Oberlin</li>
       </ul>
 
-      <p class="note" style="margin-top:30px">Svalbard is at the top of that list for a reason that shows up in section 04: it is the only place I have been where the light, the ice and the silence all arrive at once, and a camera is both completely inadequate and the only thing to do.</p>
     </section>
 
     <!-- 07 -->
@@ -499,10 +460,10 @@ p{margin:0 0 14px; max-width:66ch}
       <ul class="contactlist">
         <li><span class="k">Email</span><span><a href="mailto:tonny.cai@duke.edu">tonny.cai@duke.edu</a></span></li>
         <li><span class="k">Where</span><span>Department of Economics, Duke University, Durham, North Carolina</span></li>
-        <li><span class="k">CV</span><span><a href="cv.pdf">Three-page PDF</a></span></li>
+        <li><span class="k">CV</span><span><a href="cv.pdf" download="Yicheng(Tonny) Cai-CV.pdf">Yicheng(Tonny) Cai-CV, three-page PDF</a></span></li>
       </ul>
 
-      <p class="note">Drafts are available on request. The registries behind them are licensed commercial extracts and cannot be redistributed, but every number in every paper is regenerated by script, and the scripts travel with the draft.</p>
+      <p class="note">Drafts are available on request.</p>
     </section>
 
   </main>
@@ -518,7 +479,7 @@ p{margin:0 0 14px; max-width:66ch}
 
 <script>
 (function(){
-  var PHOTOS = [{"big":"img/p/p01.jpg","thumb":"img/t/p01.jpg","w":1600,"h":1171,"kind":"digital"},{"big":"img/p/p02.jpg","thumb":"img/t/p02.jpg","w":1600,"h":1049,"kind":"digital"},{"big":"img/p/p03.jpg","thumb":"img/t/p03.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p04.jpg","thumb":"img/t/p04.jpg","w":863,"h":1600,"kind":"digital"},{"big":"img/p/p05.jpg","thumb":"img/t/p05.jpg","w":1600,"h":1172,"kind":"digital"},{"big":"img/p/p06.jpg","thumb":"img/t/p06.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p07.jpg","thumb":"img/t/p07.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p08.jpg","thumb":"img/t/p08.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p09.jpg","thumb":"img/t/p09.jpg","w":1600,"h":1070,"kind":"digital"},{"big":"img/p/p10.jpg","thumb":"img/t/p10.jpg","w":1600,"h":1172,"kind":"digital"},{"big":"img/p/p11.jpg","thumb":"img/t/p11.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p12.jpg","thumb":"img/t/p12.jpg","w":1600,"h":1170,"kind":"digital"},{"big":"img/p/p13.jpg","thumb":"img/t/p13.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p14.jpg","thumb":"img/t/p14.jpg","w":1600,"h":1055,"kind":"digital"},{"big":"img/p/p15.jpg","thumb":"img/t/p15.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p16.jpg","thumb":"img/t/p16.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p17.jpg","thumb":"img/t/p17.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p18.jpg","thumb":"img/t/p18.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p19.jpg","thumb":"img/t/p19.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p20.jpg","thumb":"img/t/p20.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p21.jpg","thumb":"img/t/p21.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p22.jpg","thumb":"img/t/p22.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p23.jpg","thumb":"img/t/p23.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p24.jpg","thumb":"img/t/p24.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p25.jpg","thumb":"img/t/p25.jpg","w":1600,"h":1172,"kind":"digital"},{"big":"img/p/p26.jpg","thumb":"img/t/p26.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p27.jpg","thumb":"img/t/p27.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p28.jpg","thumb":"img/t/p28.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p29.jpg","thumb":"img/t/p29.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p30.jpg","thumb":"img/t/p30.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p31.jpg","thumb":"img/t/p31.jpg","w":1600,"h":785,"kind":"digital"},{"big":"img/p/p32.jpg","thumb":"img/t/p32.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p33.jpg","thumb":"img/t/p33.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p34.jpg","thumb":"img/t/p34.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p35.jpg","thumb":"img/t/p35.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p36.jpg","thumb":"img/t/p36.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p37.jpg","thumb":"img/t/p37.jpg","w":1600,"h":1172,"kind":"digital"},{"big":"img/p/p38.jpg","thumb":"img/t/p38.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p39.jpg","thumb":"img/t/p39.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/f40.jpg","thumb":"img/t/f40.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f41.jpg","thumb":"img/t/f41.jpg","w":1600,"h":1171,"kind":"film"},{"big":"img/p/f42.jpg","thumb":"img/t/f42.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f43.jpg","thumb":"img/t/f43.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f44.jpg","thumb":"img/t/f44.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f45.jpg","thumb":"img/t/f45.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f46.jpg","thumb":"img/t/f46.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f47.jpg","thumb":"img/t/f47.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f48.jpg","thumb":"img/t/f48.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f49.jpg","thumb":"img/t/f49.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f50.jpg","thumb":"img/t/f50.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f51.jpg","thumb":"img/t/f51.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f52.jpg","thumb":"img/t/f52.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f53.jpg","thumb":"img/t/f53.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f54.jpg","thumb":"img/t/f54.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f55.jpg","thumb":"img/t/f55.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f56.jpg","thumb":"img/t/f56.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f57.jpg","thumb":"img/t/f57.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f58.jpg","thumb":"img/t/f58.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f59.jpg","thumb":"img/t/f59.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f60.jpg","thumb":"img/t/f60.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f61.jpg","thumb":"img/t/f61.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f62.jpg","thumb":"img/t/f62.jpg","w":1600,"h":1060,"kind":"film"}];
+  var PHOTOS = [{"big":"img/p/f01.jpg","thumb":"img/t/f01.jpg","w":1600,"h":1171,"kind":"film"},{"big":"img/p/f02.jpg","thumb":"img/t/f02.jpg","w":1600,"h":1049,"kind":"film"},{"big":"img/p/f03.jpg","thumb":"img/t/f03.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f04.jpg","thumb":"img/t/f04.jpg","w":863,"h":1600,"kind":"film"},{"big":"img/p/f05.jpg","thumb":"img/t/f05.jpg","w":1600,"h":1172,"kind":"film"},{"big":"img/p/f06.jpg","thumb":"img/t/f06.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f07.jpg","thumb":"img/t/f07.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f08.jpg","thumb":"img/t/f08.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f09.jpg","thumb":"img/t/f09.jpg","w":1600,"h":1070,"kind":"film"},{"big":"img/p/f10.jpg","thumb":"img/t/f10.jpg","w":1600,"h":1172,"kind":"film"},{"big":"img/p/f11.jpg","thumb":"img/t/f11.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f12.jpg","thumb":"img/t/f12.jpg","w":1600,"h":1170,"kind":"film"},{"big":"img/p/f13.jpg","thumb":"img/t/f13.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f14.jpg","thumb":"img/t/f14.jpg","w":1600,"h":1055,"kind":"film"},{"big":"img/p/f15.jpg","thumb":"img/t/f15.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f16.jpg","thumb":"img/t/f16.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f17.jpg","thumb":"img/t/f17.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f18.jpg","thumb":"img/t/f18.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f19.jpg","thumb":"img/t/f19.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f20.jpg","thumb":"img/t/f20.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f21.jpg","thumb":"img/t/f21.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f22.jpg","thumb":"img/t/f22.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f23.jpg","thumb":"img/t/f23.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f24.jpg","thumb":"img/t/f24.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f25.jpg","thumb":"img/t/f25.jpg","w":1600,"h":1172,"kind":"film"},{"big":"img/p/f26.jpg","thumb":"img/t/f26.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f27.jpg","thumb":"img/t/f27.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f28.jpg","thumb":"img/t/f28.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f29.jpg","thumb":"img/t/f29.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f30.jpg","thumb":"img/t/f30.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f31.jpg","thumb":"img/t/f31.jpg","w":1600,"h":1172,"kind":"film"},{"big":"img/p/f32.jpg","thumb":"img/t/f32.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f33.jpg","thumb":"img/t/f33.jpg","w":1600,"h":1061,"kind":"film"},{"big":"img/p/f34.jpg","thumb":"img/t/f34.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f35.jpg","thumb":"img/t/f35.jpg","w":1600,"h":1171,"kind":"film"},{"big":"img/p/f36.jpg","thumb":"img/t/f36.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f37.jpg","thumb":"img/t/f37.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f38.jpg","thumb":"img/t/f38.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f39.jpg","thumb":"img/t/f39.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f40.jpg","thumb":"img/t/f40.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f41.jpg","thumb":"img/t/f41.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f42.jpg","thumb":"img/t/f42.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f43.jpg","thumb":"img/t/f43.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f44.jpg","thumb":"img/t/f44.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f45.jpg","thumb":"img/t/f45.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f46.jpg","thumb":"img/t/f46.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f47.jpg","thumb":"img/t/f47.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f48.jpg","thumb":"img/t/f48.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f49.jpg","thumb":"img/t/f49.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f50.jpg","thumb":"img/t/f50.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f51.jpg","thumb":"img/t/f51.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f52.jpg","thumb":"img/t/f52.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f53.jpg","thumb":"img/t/f53.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f54.jpg","thumb":"img/t/f54.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f55.jpg","thumb":"img/t/f55.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f56.jpg","thumb":"img/t/f56.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/d01.jpg","thumb":"img/t/d01.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d02.jpg","thumb":"img/t/d02.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d03.jpg","thumb":"img/t/d03.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d04.jpg","thumb":"img/t/d04.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d05.jpg","thumb":"img/t/d05.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d06.jpg","thumb":"img/t/d06.jpg","w":1600,"h":785,"kind":"digital"},{"big":"img/p/d07.jpg","thumb":"img/t/d07.jpg","w":1600,"h":1200,"kind":"digital"},{"big":"img/p/d08.jpg","thumb":"img/t/d08.jpg","w":1280,"h":1600,"kind":"digital"},{"big":"img/p/d09.jpg","thumb":"img/t/d09.jpg","w":1600,"h":1443,"kind":"digital"},{"big":"img/p/d10.jpg","thumb":"img/t/d10.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d11.jpg","thumb":"img/t/d11.jpg","w":1600,"h":1015,"kind":"digital"},{"big":"img/p/d12.jpg","thumb":"img/t/d12.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d13.jpg","thumb":"img/t/d13.jpg","w":1600,"h":995,"kind":"digital"},{"big":"img/p/d14.jpg","thumb":"img/t/d14.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d15.jpg","thumb":"img/t/d15.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d16.jpg","thumb":"img/t/d16.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d17.jpg","thumb":"img/t/d17.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d18.jpg","thumb":"img/t/d18.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d19.jpg","thumb":"img/t/d19.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d20.jpg","thumb":"img/t/d20.jpg","w":1600,"h":1007,"kind":"digital"},{"big":"img/p/d21.jpg","thumb":"img/t/d21.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/d22.jpg","thumb":"img/t/d22.jpg","w":1445,"h":1600,"kind":"digital"},{"big":"img/p/d23.jpg","thumb":"img/t/d23.jpg","w":1600,"h":866,"kind":"digital"},{"big":"img/p/d24.jpg","thumb":"img/t/d24.jpg","w":1600,"h":1199,"kind":"digital"},{"big":"img/p/d25.jpg","thumb":"img/t/d25.jpg","w":1600,"h":1200,"kind":"digital"},{"big":"img/p/d26.jpg","thumb":"img/t/d26.jpg","w":1600,"h":1101,"kind":"digital"},{"big":"img/p/d27.jpg","thumb":"img/t/d27.jpg","w":1600,"h":1356,"kind":"digital"},{"big":"img/p/d28.jpg","thumb":"img/t/d28.jpg","w":1600,"h":1200,"kind":"digital"},{"big":"img/p/d29.jpg","thumb":"img/t/d29.jpg","w":1600,"h":1200,"kind":"digital"},{"big":"img/p/d30.jpg","thumb":"img/t/d30.jpg","w":1600,"h":1200,"kind":"digital"}];
   var COLA   = [{"big":"img/c/c01.jpg","thumb":"img/c/c01_t.jpg","w":1400,"h":787},{"big":"img/c/c02.jpg","thumb":"img/c/c02_t.jpg","w":1400,"h":702},{"big":"img/c/c03.jpg","thumb":"img/c/c03_t.jpg","w":1400,"h":787},{"big":"img/c/c04.jpg","thumb":"img/c/c04_t.jpg","w":1400,"h":1400},{"big":"img/c/c05.jpg","thumb":"img/c/c05_t.jpg","w":1050,"h":1400},{"big":"img/c/c06.jpg","thumb":"img/c/c06_t.jpg","w":1050,"h":1400},{"big":"img/c/c07.jpg","thumb":"img/c/c07_t.jpg","w":1050,"h":1400},{"big":"img/c/c08.jpg","thumb":"img/c/c08_t.jpg","w":1400,"h":787},{"big":"img/c/c09.jpg","thumb":"img/c/c09_t.jpg","w":1400,"h":787},{"big":"img/c/c10.jpg","thumb":"img/c/c10_t.jpg","w":1105,"h":1400}];
 
   /* ---------- galleries ---------- */
