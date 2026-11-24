@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yicheng (Tonny) Cai</title>
+<meta name="description" content="Yicheng (Tonny) Cai — economics, Duke University. Chinese administrative registries, thresholds and local government. Photographs, a Coca-Cola bottle collection, and a travel list.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a ruled ledger page — fixed left rail of numbered entries, one sheet at a time sliding into the right column. */
+:root{
+  --paper:#EEF0EB;
+  --card:#F8F9F6;
+  --ink:#14181A;
+  --muted:#5A6360;
+  --accent:#27417A;
+  --rule:#D3D8D2;
+  --shadow:0 1px 0 rgba(20,24,26,.04), 0 12px 32px -24px rgba(20,24,26,.45);
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F1214; --card:#161A1C; --ink:#E6EAEA; --muted:#8E9A98;
+    --accent:#8FB0F0; --rule:#252B2E;
+    --shadow:0 1px 0 rgba(0,0,0,.4), 0 16px 40px -28px rgba(0,0,0,.9);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F1214; --card:#161A1C; --ink:#E6EAEA; --muted:#8E9A98;
+  --accent:#8FB0F0; --rule:#252B2E;
+  --shadow:0 1px 0 rgba(0,0,0,.4), 0 16px 40px -28px rgba(0,0,0,.9);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden}
+a{color:var(--accent); text-underline-offset:3px; text-decoration-thickness:.07em}
+a:hover{text-decoration-thickness:.12em}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+
+.shell{display:grid; grid-template-columns:286px minmax(0,1fr); min-height:100%; max-width:100%}
+
+/* ---------- left rail ---------- */
+.rail{
+  position:sticky; top:0; align-self:start; height:100vh;
+  display:flex; flex-direction:column; gap:22px;
+  padding:42px 26px 28px 40px;
+  border-right:1px solid var(--rule);
+}
+.mark{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.name{
+  font-family:var(--display); font-weight:600; font-size:30px; line-height:1.08;
+  margin:10px 0 8px; text-wrap:balance; letter-spacing:-.015em;
+}
+.name .alt{display:block; font-size:17px; font-weight:400; color:var(--muted); letter-spacing:0; margin-top:4px}
+.role{font-size:14px; color:var(--muted); margin:0}
+
+nav{display:flex; flex-direction:column; gap:1px; margin-top:2px}
+.navbtn{
+  position:relative; display:flex; align-items:baseline; gap:12px;
+  font:inherit; font-size:15px; color:var(--ink);
+  background:none; border:0; border-radius:3px;
+  padding:8px 10px 8px 14px; text-align:left; cursor:pointer;
+  transition:background 160ms ease, color 160ms ease, transform 90ms ease;
+}
+.navbtn::before{
+  content:""; position:absolute; left:0; top:6px; bottom:6px; width:2px;
+  background:var(--accent); transform:scaleY(0); transform-origin:50% 50%;
+  transition:transform 280ms cubic-bezier(.2,.8,.2,1);
+}
+.navbtn .idx{font-family:var(--mono); font-size:11px; color:var(--muted); transition:color 160ms ease}
+.navbtn:hover{background:color-mix(in srgb, var(--ink) 5%, transparent)}
+.navbtn:active{transform:translateX(1px) scale(.994)}
+.navbtn[aria-current="true"]{color:var(--accent)}
+.navbtn[aria-current="true"]::before{transform:scaleY(1)}
+.navbtn[aria-current="true"] .idx{color:var(--accent)}
+
+.railfoot{margin-top:auto; display:flex; flex-direction:column; gap:7px; font-size:13.5px; color:var(--muted)}
+.railfoot a{color:var(--muted)}
+.railfoot a:hover{color:var(--accent)}
+
+/* ---------- stage ---------- */
+.stage{padding:52px 48px 72px; max-width:860px}
+.stage.wide{max-width:1180px}
+.panel{display:none}
+.panel.is-active{display:block}
+
+@keyframes sheetIn{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+@keyframes lineIn{from{opacity:0; transform:translateY(9px)} to{opacity:1; transform:none}}
+.panel.enter{animation:sheetIn 380ms cubic-bezier(.19,.73,.21,1) both}
+.panel.enter > *{animation:lineIn 420ms cubic-bezier(.19,.73,.21,1) both}
+.panel.enter > *:nth-child(1){animation-delay:30ms}
+.panel.enter > *:nth-child(2){animation-delay:70ms}
+.panel.enter > *:nth-child(3){animation-delay:110ms}
+.panel.enter > *:nth-child(4){animation-delay:150ms}
+.panel.enter > *:nth-child(5){animation-delay:190ms}
+.panel.enter > *:nth-child(6){animation-delay:225ms}
+.panel.enter > *:nth-child(n+7){animation-delay:255ms}
+
+.eyebrow{
+  display:flex; align-items:center; gap:14px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); margin:0 0 18px;
+}
+.eyebrow::after{content:""; flex:1; height:1px; background:var(--rule)}
+h1{font-family:var(--display); font-weight:600; font-size:clamp(30px,4.4vw,44px); line-height:1.1; letter-spacing:-.02em; margin:0 0 18px; text-wrap:balance}
+h2{font-family:var(--display); font-weight:600; font-size:21px; line-height:1.25; margin:34px 0 10px; text-wrap:balance}
+h3{font-family:var(--body); font-weight:600; font-size:15.5px; margin:0 0 4px}
+p{margin:0 0 14px; max-width:66ch}
+.lede{font-size:18.5px; line-height:1.6}
+.serif{font-family:var(--display); font-size:17.5px; line-height:1.68; max-width:62ch}
+
+/* figures strip */
+.figures{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); border-radius:4px; overflow:hidden;
+  margin:28px 0 8px;
+}
+.fig{background:var(--card); padding:16px 16px 14px}
+.fig b{
+  display:block; font-family:var(--mono); font-weight:500; font-size:19px;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em; color:var(--ink);
+}
+.fig span{display:block; font-size:12.5px; color:var(--muted); margin-top:5px; line-height:1.4}
+
+/* entries */
+.entry{padding:18px 0; border-top:1px solid var(--rule)}
+.entry:first-of-type{border-top:0}
+.entry .meta{font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.04em}
+.entry p{margin:6px 0 0; font-size:14.8px; color:var(--muted); max-width:70ch}
+.title-line{font-family:var(--display); font-size:18px; font-weight:600; line-height:1.3; margin:2px 0 2px; text-wrap:balance}
+
+.wip{list-style:none; margin:10px 0 0; padding:0; display:flex; flex-direction:column; gap:9px}
+.wip li{display:flex; gap:12px; font-size:15px; line-height:1.45}
+.wip .n{font-family:var(--mono); font-size:11px; color:var(--muted); padding-top:4px; min-width:18px}
+
+/* cv */
+.cvrow{display:grid; grid-template-columns:142px minmax(0,1fr); gap:18px; padding:14px 0; border-top:1px solid var(--rule)}
+.cvrow:first-of-type{border-top:0}
+.cvrow .when{font-family:var(--mono); font-size:12px; color:var(--muted); padding-top:2px; font-variant-numeric:tabular-nums}
+.cvrow p{margin:3px 0 0; font-size:14.5px; color:var(--muted)}
+.pdf{
+  display:inline-flex; align-items:center; gap:9px; margin-top:22px;
+  font-family:var(--mono); font-size:12.5px; letter-spacing:.04em;
+  padding:10px 16px; border:1px solid var(--rule); border-radius:3px;
+  background:var(--card); color:var(--ink); text-decoration:none;
+  transition:border-color 160ms ease, transform 90ms ease, color 160ms ease;
+}
+.pdf:hover{border-color:var(--accent); color:var(--accent)}
+.pdf:active{transform:translateY(1px)}
+
+/* cards */
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:14px; margin-top:20px}
+.card{background:var(--card); border:1px solid var(--rule); border-radius:4px; padding:17px 17px 15px}
+.card h3{margin-bottom:6px}
+.card p{font-size:14.3px; color:var(--muted); margin:0}
+
+.contactlist{list-style:none; padding:0; margin:18px 0 0; display:flex; flex-direction:column; gap:12px}
+.contactlist li{display:grid; grid-template-columns:110px minmax(0,1fr); gap:14px; font-size:15px}
+.contactlist .k{font-family:var(--mono); font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); padding-top:3px}
+
+.note{font-size:13.5px; color:var(--muted); border-left:2px solid var(--rule); padding-left:14px; margin-top:26px}
+
+/* ---------- gallery ---------- */
+.gallery{columns:3; column-gap:12px; margin:26px 0 0}
+.gallery.bottles{columns:3}
+.tile{
+  display:block; width:100%; padding:0; margin:0 0 12px; border:0; border-radius:3px;
+  background:var(--card); overflow:hidden; cursor:zoom-in; position:relative;
+  break-inside:avoid; -webkit-column-break-inside:avoid;
+  box-shadow:var(--shadow);
+  transition:transform 140ms cubic-bezier(.2,.8,.2,1), box-shadow 240ms ease;
+}
+.tile img{display:block; width:100%; height:auto; transition:transform 600ms cubic-bezier(.19,.73,.21,1), filter 300ms ease}
+.tile::after{
+  content:""; position:absolute; inset:0; border:1px solid rgba(255,255,255,0);
+  box-shadow:inset 0 0 0 1px rgba(20,24,26,.06); pointer-events:none;
+}
+.tile:hover img{transform:scale(1.035)}
+.tile:active{transform:scale(.988)}
+.tile .tag{
+  position:absolute; left:8px; bottom:8px; z-index:2;
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:#fff; background:rgba(12,14,16,.55); padding:3px 7px; border-radius:2px;
+  opacity:0; transform:translateY(4px); transition:opacity 220ms ease, transform 220ms ease;
+}
+.tile:hover .tag, .tile:focus-visible .tag{opacity:1; transform:none}
+
+.gallerybar{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:22px 0 2px}
+.chipbtn{
+  font:inherit; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); background:var(--card); border:1px solid var(--rule); border-radius:999px;
+  padding:6px 14px; cursor:pointer;
+  transition:color 160ms ease, border-color 160ms ease, transform 90ms ease, background 160ms ease;
+}
+.chipbtn:hover{color:var(--ink); border-color:var(--ink)}
+.chipbtn:active{transform:scale(.97)}
+.chipbtn[aria-pressed="true"]{color:var(--paper); background:var(--accent); border-color:var(--accent)}
+
+/* ---------- lightbox ---------- */
+.lightbox{
+  position:fixed; inset:0; z-index:60; display:none;
+  background:color-mix(in srgb, var(--paper) 86%, #000 14%);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+}
+.lightbox.open{display:grid; grid-template-rows:1fr auto; animation:boxIn 220ms ease both}
+@keyframes boxIn{from{opacity:0} to{opacity:1}}
+@keyframes imgIn{from{opacity:0; transform:scale(.975)} to{opacity:1; transform:none}}
+.lbstage{display:grid; place-items:center; padding:34px 76px 8px; min-height:0; overflow:hidden}
+.lbstage img{
+  max-width:100%; max-height:calc(100vh - 110px); object-fit:contain; border-radius:3px;
+  box-shadow:0 30px 70px -40px rgba(0,0,0,.8);
+  animation:imgIn 320ms cubic-bezier(.19,.73,.21,1) both;
+}
+.lbbar{
+  display:flex; align-items:center; justify-content:center; gap:18px;
+  padding:12px 20px 24px; font-family:var(--mono); font-size:11.5px;
+  letter-spacing:.08em; color:var(--muted);
+}
+.lbbtn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:46px; height:46px; display:grid; place-items:center;
+  border:1px solid var(--rule); border-radius:50%; background:var(--card); color:var(--ink);
+  font-size:17px; cursor:pointer;
+  transition:border-color 160ms ease, transform 110ms ease, color 160ms ease;
+}
+.lbbtn:hover{border-color:var(--accent); color:var(--accent)}
+.lbbtn:active{transform:translateY(-50%) scale(.92)}
+.lbprev{left:16px} .lbnext{right:16px}
+.lbclose{
+  position:absolute; top:16px; right:16px; transform:none;
+  width:40px; height:40px; font-size:15px;
+}
+.lbclose:active{transform:scale(.92)}
+
+/* ---------- travel ---------- */
+.placelist{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 4px; padding:0; list-style:none}
+.place{
+  font-size:14px; padding:6px 13px; border-radius:999px;
+  border:1px solid var(--rule); background:var(--card); color:var(--ink);
+  transition:transform 120ms cubic-bezier(.2,.8,.2,1), border-color 160ms ease, color 160ms ease;
+}
+.place:hover{transform:translateY(-2px); border-color:var(--accent); color:var(--accent)}
+.place.soft{color:var(--muted); background:transparent; border-style:dashed}
+.place.loved{border-color:color-mix(in srgb, var(--accent) 55%, var(--rule)); color:var(--accent)}
+.sublabel{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:26px 0 0}
+
+/* ---------- small screens ---------- */
+@media (max-width:1100px){ .gallery{columns:2} }
+@media (max-width:860px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{position:static; height:auto; min-width:0; padding:30px 20px 0; border-right:0; border-bottom:1px solid var(--rule); gap:18px}
+  .railfoot{display:none}
+  nav{flex-direction:row; gap:2px; overflow-x:auto; margin:0 -20px; padding:0 20px 10px; scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  .navbtn{padding:8px 12px; white-space:nowrap; flex:0 0 auto}
+  .navbtn::before{left:10px; right:10px; top:auto; bottom:0; width:auto; height:2px; transform:scaleX(0)}
+  .navbtn[aria-current="true"]::before{transform:scaleX(1)}
+  .stage{padding:30px 20px 64px}
+  .name{font-size:26px}
+  .lbstage{padding:16px 12px 6px}
+  .lbstage img{max-height:calc(100vh - 96px)}
+  .lbbtn{width:40px; height:40px}
+  .lbprev{left:8px} .lbnext{right:8px}
+}
+@media (max-width:560px){ .gallery, .gallery.bottles{columns:1} }
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
+  .tile:hover img{transform:none}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="rail">
+    <div>
+      <p class="mark">Economics &middot; Duke University</p>
+      <h2 class="name" style="margin-top:10px">Yicheng Cai<span class="alt">also Tonny Cai</span></h2>
+      <p class="role">Master of Arts in Economics. Chinese administrative registries, public finance, firm entry and exit.</p>
+    </div>
+
+    <nav id="nav" aria-label="Sections">
+      <button class="navbtn" data-go="about" aria-current="true"><span class="idx">01</span><span>About</span></button>
+      <button class="navbtn" data-go="research"><span class="idx">02</span><span>Research</span></button>
+      <button class="navbtn" data-go="cv"><span class="idx">03</span><span>CV</span></button>
+      <button class="navbtn" data-go="photographs"><span class="idx">04</span><span>Photographs</span></button>
+      <button class="navbtn" data-go="bottles"><span class="idx">05</span><span>Bottles</span></button>
+      <button class="navbtn" data-go="travel"><span class="idx">06</span><span>Travel</span></button>
+      <button class="navbtn" data-go="contact"><span class="idx">07</span><span>Contact</span></button>
+    </nav>
+
+    <div class="railfoot">
+      <a href="mailto:tonny.cai@duke.edu">tonny.cai@duke.edu</a>
+      <span>Durham, North Carolina</span>
+    </div>
+  </aside>
+
+  <main class="stage" id="stage">
+
+    <!-- 01 -->
+    <section class="panel is-active" id="about" aria-labelledby="about-h">
+      <p class="eyebrow">01 &nbsp;About</p>
+      <h1 id="about-h">A river town, and the habit of looking things up</h1>
+      <p class="serif">I was born in Yichang, a mountain city in central China. The ranges stand at its back and the Yangtze cuts it in two, and the people it makes are shaped by both: hardy enough to climb, and mild in the way a long river is mild. I grew up crossing between the city and the countryside. When someone asks where I am from, what surfaces first is the bright commotion of that river town, and a half-second later the green, unripe smell of hill water, as if my shoes were walking a paved street while still caked with country mud.</p>
+      <p class="serif">Coming to the United States, I met the most genuine and generous people I have known, the faculty at Oberlin. They are the reason I fell in love with research, and it was their patience and their encouragement that turned the road toward economics. I intend to carry what they taught me, and the qualities they taught it with, into whatever the work becomes.</p>
+      <p>Today that work sits between public finance and development, and it is mostly about rules written as numbers. A cap of fifty partners. A profit threshold of ten million. A list you are required to leave by a certain year. I study what happens on the other side of rules like these, using Chinese administrative registries large enough that the arithmetic itself becomes the evidence.</p>
+
+      <div class="figures">
+        <div class="fig"><b>81,482,453</b><span>registration records screened for manufactured entry</span></div>
+        <div class="fig"><b>3,511,920</b><span>parcel-level land transfers classified by buyer</span></div>
+        <div class="fig"><b>2,405</b><span>development zones matched to their declared industries</span></div>
+        <div class="fig"><b>59,061</b><span>partnerships from a single registration operation</span></div>
+      </div>
+
+      <h2>Off the clock</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Cooking</h3>
+          <p>The one hobby with a hard deadline and an immediate referee. Hunan and Hubei food mostly, which is to say a great deal of chili and a tolerance for smoke.</p>
+        </div>
+        <div class="card">
+          <h3>Photography</h3>
+          <p>Film and digital, carried through the Arctic, Tibet, the English coast and a good many ferry decks. <a href="#photographs">Section 04</a>.</p>
+        </div>
+        <div class="card">
+          <h3>Coca-Cola bottles</h3>
+          <p>A collection built since school, mostly limited editions and foreign-market packaging. <a href="#bottles">Section 05</a>.</p>
+        </div>
+        <div class="card">
+          <h3>Founding a club</h3>
+          <p>I started the OEES Club at Oberlin in 2023 and ran it until I graduated, a standing seminar where development economics, environmental economics and sociology argue with each other.</p>
+        </div>
+      </div>
+      <p class="note">Every figure on this site comes from a draft that regenerates its own numbers from the data and checks them against the written text before it will compile.</p>
+    </section>
+
+    <!-- 02 -->
+    <section class="panel" id="research" aria-labelledby="research-h">
+      <p class="eyebrow">02 &nbsp;Research</p>
+      <h1 id="research-h">Working papers</h1>
+      <p>The method is usually the same. Take a register nobody built for research, establish what it can and cannot support, and look for the structure a rule leaves behind. Sometimes the answer is an event study. Sometimes it is a count that never exceeds a particular number.</p>
+
+      <div class="entry">
+        <p class="meta">October 2026 &middot; draft available</p>
+        <p class="title-line">Shells Without Substance: What Happens When a Tax Haven Closes</p>
+        <p>A stacked event study around the 2018 dismantling of a border-county tax exemption, covering 183 listed parents and 1,881 haven subsidiary-years. Exposed parents become 14.6 to 22.1 percentage points less likely to report positive pre-tax profit, while revenue and taxes actually paid do not move. Havens that require real operations show an effect of zero.</p>
+      </div>
+
+      <div class="entry">
+        <p class="meta">November 2026 &middot; draft available</p>
+        <p class="title-line">Fifty Minus One: How a Statutory Partner Cap Built a 59,000-Entity Pyramid</p>
+        <p>59,061 limited partnerships registered by one operation in two founding years. Of 69 inter-tier capital ratios, 64 fall between 48 and 49, and none exceeds 49. The maximum is 48.99: the statutory cap of fifty partners, minus the one general partner every partnership must have.</p>
+      </div>
+
+      <div class="entry">
+        <p class="meta">October 2026 &middot; draft available</p>
+        <p class="title-line">Targeting Yesterday: Industrial Zones and the Selection of Declining Industries</p>
+        <p>Chinese development zones announce the industries they intend to attract. Matching 2,405 of them to a county-by-industry registration panel, registration does shift toward the declared industry. The industries declared, however, are ones already contracting nationally, and had been for years before the announcement.</p>
+      </div>
+
+      <div class="entry">
+        <p class="meta">November 2026 &middot; draft available</p>
+        <p class="title-line">A Screen for Manufactured Entry: Registered Capital Roundness</p>
+        <p>A capital figure a founder chooses is round. One produced by dividing a parent's capital among a fixed number of seats is a quotient, and division by anything but a power of ten destroys roundness. The screen is a single inequality, run across 81,482,453 non-individual registration records.</p>
+      </div>
+
+      <h2>Work in progress</h2>
+      <ul class="wip">
+        <li><span class="n">05</span><span>Who Buys When the Market Stops: local government platforms in China's land auctions, 2009 to 2024.</span></li>
+        <li><span class="n">06</span><span>A Cap Is an Estimator: person-count thresholds across sixteen rules in five jurisdictions.</span></li>
+        <li><span class="n">07</span><span>The Denominator Decides: one set of entry and exit flows, three denominators, three signs.</span></li>
+        <li><span class="n">08</span><span>Competing for Paper: registration arbitrage and a newly created tax base.</span></li>
+        <li><span class="n">09</span><span>Deleveraging, Not a Run: how the local platform bond market contracted.</span></li>
+        <li><span class="n">10</span><span>Leaving the List: what changes when a financing platform declares it is not one.</span></li>
+      </ul>
+
+      <h2>Publication</h2>
+      <div class="entry">
+        <p class="meta">2025 &middot; Academic Press</p>
+        <p class="title-line">Hypotheses Interconnecting Economic Development with Environmental Quality</p>
+        <p>With Faeze Akbari and Vahid Mohamad Taghvaee. In Nicholas Apergis, editor, <em>Encyclopedia of Monetary Policy, Financial Markets and Banking</em>, volume 1, pages 624 to 628. <a href="https://doi.org/10.1016/B978-0-44-313776-1.00345-7">doi:10.1016/B978-0-44-313776-1.00345-7</a></p>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="panel" id="cv" aria-labelledby="cv-h">
+      <p class="eyebrow">03 &nbsp;Curriculum vitae</p>
+      <h1 id="cv-h">Education and experience</h1>
+
+      <h2>Education</h2>
+      <div class="cvrow">
+        <div class="when">2026 to 2028</div>
+        <div><h3>Duke University</h3><p>Master of Arts in Economics, expected May 2028. Duke Economics Master's Top Scholar Award.</p></div>
+      </div>
+      <div class="cvrow">
+        <div class="when">2022 to 2026</div>
+        <div><h3>Oberlin College</h3><p>BA in Economics with Honors and Mathematics; minors in East Asian Studies and Statistical Modeling. The Comfort Starr Prize in Economics.</p></div>
+      </div>
+      <div class="cvrow">
+        <div class="when">2024 to 2025</div>
+        <div><h3>University of Oxford, Magdalen College</h3><p>Visiting student in economics and mathematics.</p></div>
+      </div>
+
+      <h2>Research</h2>
+      <div class="cvrow">
+        <div class="when">2025 to 2026</div>
+        <div><h3>Honors Program, Oberlin College</h3><p>The administrative burden of a mass mobilization programme, with night-light intensity over government offices as a proxy for overtime.</p></div>
+      </div>
+      <div class="cvrow">
+        <div class="when">2025 to now</div>
+        <div><h3>Climate Change Economics, University College London</h3><p>Research assistant on the low carbon transition review.</p></div>
+      </div>
+      <div class="cvrow">
+        <div class="when">2024 to 2025</div>
+        <div><h3>University of Oxford</h3><p>Co-author on economic development and environmental quality; research assistant on cash transfers and migration in flood-exposed villages in Bangladesh.</p></div>
+      </div>
+
+      <h2>Industry</h2>
+      <div class="cvrow">
+        <div class="when">2023 to now</div>
+        <div><h3>Equity and industry research</h3><p>Healthcare and chemicals coverage at Huafu Securities and Guotai Junan Securities; private equity screening at Paratus Capital; solar cell coverage at East Asia Qianhai Securities.</p></div>
+      </div>
+
+      <a class="pdf" href="cv.pdf">Full CV, PDF, three pages</a>
+    </section>
+
+    <!-- 04 -->
+    <section class="panel" id="photographs" aria-labelledby="ph-h">
+      <p class="eyebrow">04 &nbsp;Photographs</p>
+      <h1 id="ph-h">Photographs</h1>
+      <p class="lede">Film and digital, made between 2021 and 2026. The ice and the ships are the Arctic; the yellow walls and the prayer flags are Tibet; a good deal of the rest is the English coast, Iceland, and whatever was outside the window.</p>
+      <div class="gallerybar" role="group" aria-label="Filter photographs">
+        <button class="chipbtn" data-filter="all" aria-pressed="true">All 62</button>
+        <button class="chipbtn" data-filter="film" aria-pressed="false">Film 23</button>
+        <button class="chipbtn" data-filter="digital" aria-pressed="false">Digital 39</button>
+      </div>
+      <div class="gallery" id="gal-photos"></div>
+      <p class="note">Click any frame to open it. Arrow keys move through the set, Escape closes it.</p>
+    </section>
+
+    <!-- 05 -->
+    <section class="panel" id="bottles" aria-labelledby="bo-h">
+      <p class="eyebrow">05 &nbsp;Collection</p>
+      <h1 id="bo-h">Coca-Cola bottles</h1>
+      <p class="lede">A collection built since school: limited editions, anniversary runs, foreign-market packaging, and the occasional shape that only existed in one country for one summer. It is the same instinct as the research, honestly. A long run of near-identical objects, and all the interest sitting in the small deviations.</p>
+      <div class="gallery bottles" id="gal-cola"></div>
+      <p class="note">Shelf photographs, not a catalogue. If you collect too, I would like to hear about it.</p>
+    </section>
+
+    <!-- 06 -->
+    <section class="panel" id="travel" aria-labelledby="tr-h">
+      <p class="eyebrow">06 &nbsp;Travel</p>
+      <h1 id="tr-h">Where I have been, and where I am going</h1>
+      <p class="lede">Ten countries and more than half the provinces and regions of China. The list below is honest about which of these I would go back to tomorrow.</p>
+
+      <p class="sublabel">Been</p>
+      <ul class="placelist">
+        <li class="place">Russia</li><li class="place">Japan</li><li class="place">Singapore</li>
+        <li class="place">South Korea</li><li class="place">Georgia</li><li class="place">United States</li>
+        <li class="place">United Kingdom</li><li class="place">Norway</li><li class="place">Iceland</li>
+        <li class="place">Spain</li><li class="place">China, over half its regions</li>
+      </ul>
+
+      <p class="sublabel">Going</p>
+      <ul class="placelist">
+        <li class="place soft">Cuba</li><li class="place soft">South Africa</li><li class="place soft">India</li>
+        <li class="place soft">Chile</li><li class="place soft">Italy</li><li class="place soft">North Korea</li>
+      </ul>
+
+      <p class="sublabel">The ones I love most</p>
+      <ul class="placelist">
+        <li class="place loved">Svalbard</li><li class="place loved">Iceland</li><li class="place loved">Qingdao</li>
+        <li class="place loved">Kaohsiung</li><li class="place loved">Tibet</li><li class="place loved">Oberlin</li>
+      </ul>
+
+      <p class="note" style="margin-top:30px">Svalbard is at the top of that list for a reason that shows up in section 04: it is the only place I have been where the light, the ice and the silence all arrive at once, and a camera is both completely inadequate and the only thing to do.</p>
+    </section>
+
+    <!-- 07 -->
+    <section class="panel" id="contact" aria-labelledby="contact-h">
+      <p class="eyebrow">07 &nbsp;Contact</p>
+      <h1 id="contact-h">Get in touch</h1>
+      <p class="lede">I am looking for coauthors, advisers and comments, especially from people who work on Chinese administrative data and know where its seams are.</p>
+
+      <ul class="contactlist">
+        <li><span class="k">Email</span><span><a href="mailto:tonny.cai@duke.edu">tonny.cai@duke.edu</a></span></li>
+        <li><span class="k">Where</span><span>Department of Economics, Duke University, Durham, North Carolina</span></li>
+        <li><span class="k">CV</span><span><a href="cv.pdf">Three-page PDF</a></span></li>
+      </ul>
+
+      <p class="note">Drafts are available on request. The registries behind them are licensed commercial extracts and cannot be redistributed, but every number in every paper is regenerated by script, and the scripts travel with the draft.</p>
+    </section>
+
+  </main>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer">
+  <div class="lbstage" id="lbstage"></div>
+  <div class="lbbar"><span id="lbcount">1 / 1</span></div>
+  <button class="lbbtn lbprev" id="lbprev" aria-label="Previous">&#8249;</button>
+  <button class="lbbtn lbnext" id="lbnext" aria-label="Next">&#8250;</button>
+  <button class="lbbtn lbclose" id="lbclose" aria-label="Close">&#10005;</button>
+</div>
+
+<script>
+(function(){
+  var PHOTOS = [{"big":"img/p/p01.jpg","thumb":"img/t/p01.jpg","w":1600,"h":1171,"kind":"digital"},{"big":"img/p/p02.jpg","thumb":"img/t/p02.jpg","w":1600,"h":1049,"kind":"digital"},{"big":"img/p/p03.jpg","thumb":"img/t/p03.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p04.jpg","thumb":"img/t/p04.jpg","w":863,"h":1600,"kind":"digital"},{"big":"img/p/p05.jpg","thumb":"img/t/p05.jpg","w":1600,"h":1172,"kind":"digital"},{"big":"img/p/p06.jpg","thumb":"img/t/p06.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p07.jpg","thumb":"img/t/p07.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p08.jpg","thumb":"img/t/p08.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p09.jpg","thumb":"img/t/p09.jpg","w":1600,"h":1070,"kind":"digital"},{"big":"img/p/p10.jpg","thumb":"img/t/p10.jpg","w":1600,"h":1172,"kind":"digital"},{"big":"img/p/p11.jpg","thumb":"img/t/p11.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p12.jpg","thumb":"img/t/p12.jpg","w":1600,"h":1170,"kind":"digital"},{"big":"img/p/p13.jpg","thumb":"img/t/p13.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p14.jpg","thumb":"img/t/p14.jpg","w":1600,"h":1055,"kind":"digital"},{"big":"img/p/p15.jpg","thumb":"img/t/p15.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p16.jpg","thumb":"img/t/p16.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p17.jpg","thumb":"img/t/p17.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p18.jpg","thumb":"img/t/p18.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p19.jpg","thumb":"img/t/p19.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p20.jpg","thumb":"img/t/p20.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p21.jpg","thumb":"img/t/p21.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p22.jpg","thumb":"img/t/p22.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p23.jpg","thumb":"img/t/p23.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p24.jpg","thumb":"img/t/p24.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p25.jpg","thumb":"img/t/p25.jpg","w":1600,"h":1172,"kind":"digital"},{"big":"img/p/p26.jpg","thumb":"img/t/p26.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p27.jpg","thumb":"img/t/p27.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p28.jpg","thumb":"img/t/p28.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p29.jpg","thumb":"img/t/p29.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p30.jpg","thumb":"img/t/p30.jpg","w":1600,"h":1066,"kind":"digital"},{"big":"img/p/p31.jpg","thumb":"img/t/p31.jpg","w":1600,"h":785,"kind":"digital"},{"big":"img/p/p32.jpg","thumb":"img/t/p32.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p33.jpg","thumb":"img/t/p33.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p34.jpg","thumb":"img/t/p34.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p35.jpg","thumb":"img/t/p35.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p36.jpg","thumb":"img/t/p36.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p37.jpg","thumb":"img/t/p37.jpg","w":1600,"h":1172,"kind":"digital"},{"big":"img/p/p38.jpg","thumb":"img/t/p38.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/p39.jpg","thumb":"img/t/p39.jpg","w":1600,"h":1061,"kind":"digital"},{"big":"img/p/f40.jpg","thumb":"img/t/f40.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f41.jpg","thumb":"img/t/f41.jpg","w":1600,"h":1171,"kind":"film"},{"big":"img/p/f42.jpg","thumb":"img/t/f42.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f43.jpg","thumb":"img/t/f43.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f44.jpg","thumb":"img/t/f44.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f45.jpg","thumb":"img/t/f45.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f46.jpg","thumb":"img/t/f46.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f47.jpg","thumb":"img/t/f47.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f48.jpg","thumb":"img/t/f48.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f49.jpg","thumb":"img/t/f49.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f50.jpg","thumb":"img/t/f50.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f51.jpg","thumb":"img/t/f51.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f52.jpg","thumb":"img/t/f52.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f53.jpg","thumb":"img/t/f53.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f54.jpg","thumb":"img/t/f54.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f55.jpg","thumb":"img/t/f55.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f56.jpg","thumb":"img/t/f56.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f57.jpg","thumb":"img/t/f57.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f58.jpg","thumb":"img/t/f58.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f59.jpg","thumb":"img/t/f59.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f60.jpg","thumb":"img/t/f60.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f61.jpg","thumb":"img/t/f61.jpg","w":1600,"h":1060,"kind":"film"},{"big":"img/p/f62.jpg","thumb":"img/t/f62.jpg","w":1600,"h":1060,"kind":"film"}];
+  var COLA   = [{"big":"img/c/c01.jpg","thumb":"img/c/c01_t.jpg","w":1400,"h":787},{"big":"img/c/c02.jpg","thumb":"img/c/c02_t.jpg","w":1400,"h":702},{"big":"img/c/c03.jpg","thumb":"img/c/c03_t.jpg","w":1400,"h":787},{"big":"img/c/c04.jpg","thumb":"img/c/c04_t.jpg","w":1400,"h":1400},{"big":"img/c/c05.jpg","thumb":"img/c/c05_t.jpg","w":1050,"h":1400},{"big":"img/c/c06.jpg","thumb":"img/c/c06_t.jpg","w":1050,"h":1400},{"big":"img/c/c07.jpg","thumb":"img/c/c07_t.jpg","w":1050,"h":1400},{"big":"img/c/c08.jpg","thumb":"img/c/c08_t.jpg","w":1400,"h":787},{"big":"img/c/c09.jpg","thumb":"img/c/c09_t.jpg","w":1400,"h":787},{"big":"img/c/c10.jpg","thumb":"img/c/c10_t.jpg","w":1105,"h":1400}];
+
+  /* ---------- galleries ---------- */
+  function tile(src, thumb, w, h, label, set, i){
+    var b = document.createElement('button');
+    b.className = 'tile';
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Open photograph ' + (i+1));
+    b.dataset.set = set; b.dataset.i = i;
+    b.innerHTML = '<img src="' + thumb + '" width="' + w + '" height="' + h + '" loading="lazy" decoding="async" alt="">' +
+                  (label ? '<span class="tag">' + label + '</span>' : '');
+    return b;
+  }
+
+  var galP = document.getElementById('gal-photos');
+  PHOTOS.forEach(function(p, i){
+    galP.appendChild(tile(p.big, p.thumb, p.w, p.h, p.kind, 'photos', i));
+  });
+  var galC = document.getElementById('gal-cola');
+  COLA.forEach(function(p, i){
+    galC.appendChild(tile(p.big, p.thumb, p.w, p.h, '', 'cola', i));
+  });
+
+  /* ---------- filter ---------- */
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chipbtn'));
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var f = c.dataset.filter;
+      chips.forEach(function(o){ o.setAttribute('aria-pressed', o === c ? 'true' : 'false'); });
+      Array.prototype.forEach.call(galP.children, function(el, i){
+        var show = (f === 'all') || (PHOTOS[i].kind === f);
+        el.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  /* ---------- lightbox ---------- */
+  var box = document.getElementById('lightbox');
+  var lbstage = document.getElementById('lbstage');
+  var lbcount = document.getElementById('lbcount');
+  var cur = { set: 'photos', i: 0 };
+  var lastFocus = null;
+
+  function listOf(set){
+    if (set !== 'photos') return COLA;
+    return PHOTOS.filter(function(p, i){ return galP.children[i].style.display !== 'none'; });
+  }
+  function indexIn(set, i){
+    if (set !== 'photos') return i;
+    var visible = [];
+    Array.prototype.forEach.call(galP.children, function(el, k){ if (el.style.display !== 'none') visible.push(k); });
+    return visible.indexOf(i);
+  }
+
+  function paint(){
+    var list = listOf(cur.set);
+    if (!list.length) return;
+    var p = list[cur.i];
+    lbstage.innerHTML = '<img src="' + p.big + '" alt="">';
+    lbcount.textContent = (cur.i + 1) + ' / ' + list.length;
+  }
+  function open(set, domIndex){
+    cur.set = set;
+    cur.i = Math.max(0, indexIn(set, domIndex));
+    lastFocus = document.activeElement;
+    box.classList.add('open');
+    document.body.classList.add('locked');
+    paint();
+    document.getElementById('lbclose').focus();
+  }
+  function close(){
+    box.classList.remove('open');
+    document.body.classList.remove('locked');
+    lbstage.innerHTML = '';
+    if (lastFocus) lastFocus.focus();
+  }
+  function step(d){
+    var list = listOf(cur.set);
+    cur.i = (cur.i + d + list.length) % list.length;
+    paint();
+  }
+
+  document.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('.tile') : null;
+    if (t){ open(t.dataset.set, parseInt(t.dataset.i, 10)); }
+  });
+  document.getElementById('lbprev').addEventListener('click', function(){ step(-1); });
+  document.getElementById('lbnext').addEventListener('click', function(){ step(1); });
+  document.getElementById('lbclose').addEventListener('click', close);
+  box.addEventListener('click', function(e){
+    if (e.target === box || e.target.id === 'lbstage') close();
+  });
+  document.addEventListener('keydown', function(e){
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+
+  /* ---------- panels ---------- */
+  var nav = document.getElementById('nav');
+  var stage = document.getElementById('stage');
+  var buttons = Array.prototype.slice.call(nav.querySelectorAll('.navbtn'));
+  var names = buttons.map(function(b){ return b.getAttribute('data-go'); });
+  var wide = { photographs: 1, bottles: 1 };
+
+  function show(name, animate){
+    if (names.indexOf(name) === -1) name = names[0];
+    if (box.classList.contains('open')) close();
+    buttons.forEach(function(b){
+      b.setAttribute('aria-current', b.getAttribute('data-go') === name ? 'true' : 'false');
+    });
+    names.forEach(function(n){
+      var panel = document.getElementById(n);
+      if (!panel) return;
+      var on = (n === name);
+      panel.classList.remove('enter');
+      panel.classList.toggle('is-active', on);
+      if (on && animate){
+        void panel.offsetWidth;          /* restart the animation */
+        panel.classList.add('enter');
+      }
+    });
+    stage.classList.toggle('wide', !!wide[name]);
+    if (animate){
+      stage.scrollTop = 0;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  buttons.forEach(function(b){
+    b.addEventListener('click', function(){
+      var name = b.getAttribute('data-go');
+      if (location.hash.slice(1) === name){ show(name, true); return; }
+      location.hash = name;
+    });
+  });
+  document.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) return;
+    var n = a.getAttribute('href').slice(1);
+    if (names.indexOf(n) !== -1){ e.preventDefault(); location.hash = n; }
+  });
+
+  window.addEventListener('hashchange', function(){ show(location.hash.slice(1), true); });
+  show(location.hash.slice(1) || 'about', false);
+})();
+</script>
+</body>
+</html>
